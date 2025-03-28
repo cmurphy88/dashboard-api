@@ -8,6 +8,8 @@ import com.example.dashboardapi.model.Todo;
 import com.example.dashboardapi.repository.TodoRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/todos")
@@ -34,5 +36,23 @@ public class TodoController {
         }
         Todo savedTodo = todoRepository.save(todo);
         return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Todo> updateTodo(@PathVariable UUID id, @RequestBody Todo updatedTodoData) {
+
+        Optional<Todo> optionalTodo = todoRepository.findById(id);
+
+        if (optionalTodo.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Todo existingTodo = optionalTodo.get();
+        existingTodo.setContent(updatedTodoData.getContent());
+        existingTodo.setDueDate(updatedTodoData.getDueDate());
+        existingTodo.setCompleted(updatedTodoData.getCompleted());
+        Todo savedTodo = todoRepository.save(existingTodo);
+
+        return ResponseEntity.ok(savedTodo);
     }
 }

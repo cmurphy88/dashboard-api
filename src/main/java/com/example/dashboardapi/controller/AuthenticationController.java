@@ -58,7 +58,7 @@ public class AuthenticationController {
         );
 
         var user = userRepository.findByEmail(request.email())
-                .orElseThrow(() -> new IllegalStateException("User not found after successful authentication")); // Should not happen
+                .orElseThrow(() -> new IllegalStateException("User not found after successful authentication"));
 
         String jwtToken = jwtService.generateToken(user);
         return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
