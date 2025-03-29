@@ -11,31 +11,24 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "todo")
-public class Todo {
+@Table(name = "weight")
+public class Weight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "date", nullable = false, updatable = false)
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime date;
 
-    @Column(name = "due_date")
-    private LocalDateTime dueDate;
-
-    @Column(name = "content")
-    private String content;
-
-    @Column(name = "completed")
-    private Boolean completed = false;
+    @Column(name = "weight")
+    private Double weight;
 
     @Column(name = "user_id")
     private UUID userId;
 
-    public Todo() {
+    public Weight() {
     }
-
 }

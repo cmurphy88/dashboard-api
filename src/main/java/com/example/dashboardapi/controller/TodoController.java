@@ -22,6 +22,18 @@ public class TodoController {
         this.todoRepository = todoRepository;
     }
 
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete(@RequestParam UUID id) {
+        todoRepository.deleteById(id);
+        return new ResponseEntity<>("Deleted Todo with id:" + id, HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<Todo>> getAllUserTodos(@RequestParam UUID userId) {
+        List<Todo> usersTodos = todoRepository.findByUserId(userId);
+        return ResponseEntity.ok(usersTodos);
+    }
+
     @GetMapping
     public ResponseEntity<List<Todo>> getAllTodos() {
         List<Todo> todos = todoRepository.findAll();
@@ -48,9 +60,15 @@ public class TodoController {
         }
 
         Todo existingTodo = optionalTodo.get();
-        existingTodo.setContent(updatedTodoData.getContent());
-        existingTodo.setDueDate(updatedTodoData.getDueDate());
-        existingTodo.setCompleted(updatedTodoData.getCompleted());
+        if (updatedTodoData.getContent() != null) {
+            existingTodo.setContent(updatedTodoData.getContent());
+        }
+        if (updatedTodoData.getDueDate() != null) {
+            existingTodo.setDueDate(updatedTodoData.getDueDate());
+        }
+        if (updatedTodoData.getCompleted() != null) {
+            existingTodo.setCompleted(updatedTodoData.getCompleted());
+        }
         Todo savedTodo = todoRepository.save(existingTodo);
 
         return ResponseEntity.ok(savedTodo);
