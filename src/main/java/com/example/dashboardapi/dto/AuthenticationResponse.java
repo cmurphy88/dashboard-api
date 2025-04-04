@@ -1,5 +1,6 @@
 package com.example.dashboardapi.dto;
 
-// For Login Response
-public record AuthenticationResponse(String token) {
+import com.example.dashboardapi.model.UserDetails;
+
+public record AuthenticationResponse(String token, UserDetails userDetails) {
 }
