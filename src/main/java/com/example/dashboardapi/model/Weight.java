@@ -20,7 +20,6 @@ public class Weight {
     private UUID id;
 
     @Column(name = "date", nullable = false, updatable = false)
-    @CreationTimestamp
     private LocalDateTime date;
 
     @Column(name = "weight")

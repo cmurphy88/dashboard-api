@@ -36,12 +36,12 @@ public class WeightController {
 
     @GetMapping("/user")
     public ResponseEntity<List<Weight>> getAllUserWeights(@RequestParam UUID userId) {
-        List<Weight> usersWeights = weightRepository.findByUserId(userId);
+        List<Weight> usersWeights = weightRepository.findByUserIdOrderByDateAsc(userId);
         return ResponseEntity.ok(usersWeights);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<?> deleteWeight(@RequestParam UUID id) {
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<?> deleteWeight(@PathVariable UUID id) {
         weightRepository.deleteById(id);
         return new ResponseEntity<>("Deleted Weight with id:" + id, HttpStatus.OK);
     }

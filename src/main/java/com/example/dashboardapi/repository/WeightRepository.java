@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface WeightRepository extends JpaRepository<Weight, UUID> {
     List<Weight> findByUserId(UUID userId);
+    List<Weight> findByUserIdOrderByDateAsc(UUID userId);
 }
