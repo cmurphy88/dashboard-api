@@ -27,9 +27,9 @@ public class ExerciseSet {
   @Column(name = "reps")
   private Integer reps;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "exercise_id", nullable = false)
-  @JsonIgnore
-  private Exercise exercise;
+  @Column(name = "exercise_id")
+  private UUID exerciseId;
 
+  @Column(name = "session_id")
+  private UUID sessionId;
 }

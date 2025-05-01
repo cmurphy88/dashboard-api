@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class ExerciseDTO {
+public class ExerciseResponseDTO {
   private UUID id;
   private String name;
-  private List<SetDTO> sets = new ArrayList<>();
+  private List<SetResponseDTO> sets = new ArrayList<>();
 }

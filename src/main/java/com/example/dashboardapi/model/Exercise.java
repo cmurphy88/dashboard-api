@@ -23,28 +23,4 @@ public class Exercise {
   @Column(name = "name")
   private String name;
 
-  @OneToMany(
-      mappedBy = "exercise",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true,
-      fetch = FetchType.LAZY
-  )
-  private List<ExerciseSet> sets = new ArrayList<>();
-
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "session_id")
-  @JsonIgnore
-  private Session session;
-
-  public void addSet(ExerciseSet set) {
-    this.sets.add(set);
-    set.setExercise(this);
-  }
-
-  public void removeSet(ExerciseSet set) {
-    this.sets.remove(set);
-    set.setExercise(null);
-  }
-
 }

@@ -25,25 +25,6 @@ public class Session {
   @Column(name = "date")
   private LocalDateTime date;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id", nullable = false)
-  private User user;
-
-  @OneToMany(
-      mappedBy = "session",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true,
-      fetch = FetchType.LAZY
-  )
-  private List<Exercise> exercises = new ArrayList<>();
-
-  public void addExercise(Exercise exercise) {
-    this.exercises.add(exercise);
-    exercise.setSession(this);
-  }
-
-  public void removeExercise(Exercise exercise) {
-    this.exercises.remove(exercise);
-    exercise.setSession(null);
-  }
+  @Column(name = "user_id")
+  private UUID userId;
 }
