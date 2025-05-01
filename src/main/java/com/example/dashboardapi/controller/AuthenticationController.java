@@ -54,7 +54,9 @@ public class AuthenticationController {
             user.getFirstName(),
             user.getLastName()
         );
-        return ResponseEntity.ok(userDto);
+        String jwtToken = jwtService.generateToken(user);
+        UserDetails userDetails = new UserDetails(user);
+        return ResponseEntity.ok(new AuthenticationResponse(jwtToken, userDetails));
     }
 
 
